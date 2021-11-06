@@ -46,6 +46,10 @@ void imprime_vetor_acima_media_turma(Vetor* vetor);
  **/
 void imprime_csv_aprovados_reprovados(Vetor* vetor);
 
+/**
+ * @brief Ordena um vetor de alunos.
+ * @param vetor Vetor de alunos que será ordenado.
+ **/
 void ordena_vetor(Vetor* vetor);
 
 #endif

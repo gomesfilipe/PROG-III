@@ -35,6 +35,12 @@ float get_nota(Aluno* aluno);
  **/
 void libera_aluno(Aluno* aluno);
 
+/**
+ * @brief Função de callback para auxiliar na ordenação do vetor.
+ * @param a Aluno que terá seu nome comparado com outro.
+ * @param b Aluno que terá seu nome comparado com outro.
+ * @return -1, 0 ou 1 dependendo de qual aluno tem nome maior ou menor alfabeticamente.
+ **/
 int compara_aluno(const void* a, const void* b);
 
 #endif
