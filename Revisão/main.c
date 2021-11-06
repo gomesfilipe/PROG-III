@@ -22,7 +22,7 @@ int main(int argc, char** argv){
     
     Vetor* vetor = cria_vetor(fileName);
 
-    ordena_vetor(vetor);
+    //ordena_vetor(vetor);
 
     imprime_vetor(vetor);
     imprime_vetor_acima_media_turma(vetor);

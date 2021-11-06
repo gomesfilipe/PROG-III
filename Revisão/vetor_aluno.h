@@ -32,7 +32,7 @@ void imprime_vetor(Vetor* vetor);
  * @param vetor Vetor de alunos que terá sua média calculada.
  * @return Media da turma.
  **/
-int media_turma(Vetor* vetor);
+float media_turma(Vetor* vetor);
 
 /**
  * @brief Imprime os nomes dos alunos que estão acima da média da turma.
