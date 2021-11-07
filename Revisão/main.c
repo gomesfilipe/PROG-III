@@ -22,13 +22,13 @@ int main(int argc, char** argv){
     
     Vetor* vetor = cria_vetor(fileName);
 
-    //ordena_vetor(vetor);
+    ordena_vetor(vetor);
 
     imprime_vetor(vetor);
+    printf("\n");
     imprime_vetor_acima_media_turma(vetor);
     imprime_csv_aprovados_reprovados(vetor);
 
     libera_vetor(vetor);
-
     return 0;
 }

@@ -26,9 +26,5 @@ void libera_aluno(Aluno* aluno){
 }
 
 int compara_aluno(const void* a, const void* b){
-    const Aluno* a1 = a;
-    const Aluno* b1 = b;
-    
-    printf("[%s] [%s] [%d]\n", a1->nome, b1->nome, strcmp(a1->nome, b1->nome));
-    return strcmp(a1->nome, b1->nome);
+    return strcmp((*(Aluno**)a)->nome, (*(Aluno**)b)->nome);
 }

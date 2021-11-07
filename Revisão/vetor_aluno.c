@@ -46,8 +46,7 @@ void libera_vetor(Vetor* vetor){
 
 void imprime_vetor(Vetor* vetor){
     for(int i = 0; i < vetor->tam; i++){
-        printf("O aluno %s", get_nome(vetor->alunos[i]));
-        printf(" tirou a nota %.2f\n", get_nota(vetor->alunos[i]));
+        printf("O aluno %s tirou a nota %.2f\n", get_nome(vetor->alunos[i]), get_nota(vetor->alunos[i]));
     }
 }
 
@@ -62,7 +61,6 @@ float media_turma(Vetor* vetor){
 
 void imprime_vetor_acima_media_turma(Vetor* vetor){
     float med = media_turma(vetor);
-    printf("MEDIA [%.2f]\n", med);
     printf("Alunos acima da media da turma:\n");
     
     for(int i = 0; i < vetor->tam; i++){
