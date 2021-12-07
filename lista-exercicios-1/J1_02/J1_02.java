@@ -1,3 +1,5 @@
+package J1_02;
+
 public class J1_02 {
     public static void main(String[] args){
         int ab, cd, ef;

@@ -1,3 +1,5 @@
+package J2_02;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -52,16 +54,10 @@ class Aleatorio {
 	public static int getValorMaximoDefault() {
 		return VALOR_MAXIMO_DEFAULT;
 	}
-}
-
-class J2_01 {
-	public static void main(String[] args) {
-		
-		for(int i = 0; i < 10; i++) {
-			Aleatorio aleatorio = new Aleatorio();
-			System.out.print(aleatorio.getSorteado() + " ");
+	
+	public int renovar() {
+			int sorteado = random.nextInt(this.maximo);
+			this.setSorteado(sorteado);
+			return sorteado;
 		}
-		
-		System.out.println();
-	}
 }

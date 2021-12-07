@@ -1,3 +1,4 @@
+package J1_03;
 import java.util.Scanner;
 
 public class J1_03 {

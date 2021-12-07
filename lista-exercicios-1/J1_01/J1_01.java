@@ -1,3 +1,5 @@
+package J1_01;
+
 public class J1_01{
 	public static void main(String[] args) {
 		double s1, s2, s3;

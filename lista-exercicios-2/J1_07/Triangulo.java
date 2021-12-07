@@ -1,18 +1,6 @@
-import java.util.Scanner;
+package J1_07;
 
-class Ponto {
-	double x;
-	double y;
-	
-	double calcularDistancia(Ponto p) {
-		return Math.sqrt((this.x - p.x) * (this.x - p.x) + (this.y - p.y) * (this.y - p.y));
-	}
-	
-	void lerPonto(Scanner s) {
-		this.x = s.nextDouble();
-		this.y = s.nextDouble();
-	}
-}
+import java.util.Scanner;
 
 class Triangulo {
 	Ponto a = new Ponto();
@@ -33,15 +21,5 @@ class Triangulo {
 		this.b.lerPonto(s);
 		this.c.lerPonto(s);
 		s.close();
-	}
-}
-
-public class J1_07 {
-	public static void main(String[] args) {		
-		Triangulo t = new Triangulo();
-		
-		t.lerTriangulo();
-		
-		System.out.printf("%.5f", t.calcularPerimetro());
 	}
 }
