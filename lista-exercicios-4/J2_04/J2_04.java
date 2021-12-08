@@ -1,8 +1,8 @@
-package lista4;
+package J2_04;
 
 import java.util.Scanner;
 
-public class Client {
+public class J2_04 {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		
@@ -13,10 +13,8 @@ public class Client {
 		
 		for(int i = 0; i < n; i++) {
 			String line = s.nextLine();
-			//System.out.println("line: " + line);
-			String[] dados = line.split(",");
 			
-			//System.out.println("length: " + dados.length);
+			String[] dados = line.split(",");
 			
 			String nome = dados[1];
 			double preco = Double.parseDouble(dados[2]);

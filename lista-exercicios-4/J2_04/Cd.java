@@ -1,4 +1,4 @@
-package lista4;
+package J2_04;
 
 import java.util.Formatter;
 
