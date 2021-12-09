@@ -27,4 +27,8 @@ public class Circulo implements Forma {
 		fmt.close();
 		return s;
 	}
+
+	public double getRaio() {
+		return this.raio;
+	}
 }

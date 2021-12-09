@@ -20,4 +20,12 @@ public class Retangulo extends Quadrilatero {
 		fmt.close();
 		return s;
 	}
+	
+	public double getBase() {
+		return super.l1;
+	}
+	
+	public double getAltura() {
+		return super.l3;
+	}
 }

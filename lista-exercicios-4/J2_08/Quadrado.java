@@ -20,4 +20,8 @@ public class Quadrado extends Quadrilatero {
 		fmt.close();
 		return s;
 	}
+	
+	public double getLado() {
+		return super.l1;
+	}
 }

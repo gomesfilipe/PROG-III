@@ -16,20 +16,4 @@ public abstract class Quadrilatero implements Forma {
 	public double perimetro() {
 		return this.l1 + this.l2 + this.l3 + this.l4;
 	}
-
-	public double getL1() {
-		return l1;
-	}
-
-	public double getL2() {
-		return l2;
-	}
-
-	public double getL3() {
-		return l3;
-	}
-
-	public double getL4() {
-		return l4;
-	}
 }

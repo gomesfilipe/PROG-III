@@ -31,8 +31,24 @@ public class J2_08 {
 		}
 		
 		for(Forma i : formas) {
-			System.out.println(i.toString());
+			if(i instanceof Circulo) {
+				Circulo c = (Circulo) i;
+				System.out.printf("Circulo de raio %.2f - perimetro: %.2f; area: %.2f.\n", c.getRaio(), c.perimetro(), c.area());
+			
+			} else if(i instanceof Retangulo) {
+				Retangulo r = (Retangulo) i;
+				System.out.printf("Retangulo de base %.2f e altura %.2f - perimetro: %.2f; area: %.2f.\n", r.getBase(), r.getAltura(), r.perimetro(), r.area());
+			
+			} else if(i instanceof Quadrado) {
+				Quadrado q = (Quadrado) i;
+				System.out.printf("Quadrado de lado %.2f - perimetro: %.2f; area: %.2f.\n", q.getLado(), q.perimetro(), q.area());
+			}
 		}
+		
+		// Também pode ser feito desse modo. O exercício pede para usar instanceof e downcasting.
+		// for(Forma i : formas) {
+		// 	System.out.println(i.toString());
+		// }
 		
 		s.close();
 	}
