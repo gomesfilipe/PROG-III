@@ -2,8 +2,6 @@ package TP1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -65,10 +63,7 @@ public class PoliticParty {
 			
 			while (input.hasNextLine()) {
 			    String line = input.nextLine();
-                
                 String linePartys[] = line.split(",");
-                
-                //System.out.println(linePartys[0]);
                 
                 int number = Integer.parseInt(linePartys[0]);
                 int legendVotes = Integer.parseInt(linePartys[1]);
@@ -82,7 +77,7 @@ public class PoliticParty {
 			input.close();
 		
         } catch (FileNotFoundException e) {
-        	System.out.println("An Error has ocurred! FileNotFoundException");
+            System.out.println("An Error has ocurred! FileNotFoundException");
         }
         
         return partys;
@@ -108,61 +103,172 @@ public class PoliticParty {
         //     }
         // }
     }
-
-    public static void report8(Map<Integer, PoliticParty> partys, PrintWriter output) {
-    	output.println("Primeiro e último colocados de cada partido:");
-        
-    	int j = 1;
-        for(Integer key : partys.keySet()) {
-            PoliticParty party = partys.get(key);
-            List<Candidate> list = party.getCandidates();
-            
-            Collections.sort(list); // Resolver depois, deve ter um lugar melhor pra ordenar essa lista.
-            
-            Candidate first = null;
-            Candidate last = null;
-
-            for(int i = 0; i < list.size(); i++) {
-                first = list.get(i);
-                
-                if(first.getNominalVotes() > 0 && first.getVoteDestination().equals("Válido")) { // Tem que ser "válido"
-                    break;
-                }
-                first = null;
-            }
-            
-            for(int i = 0; i < list.size(); i++) {
-                last = list.get(list.size() - 1 - i);
-
-                if(last.getNominalVotes() > 0 && last.getVoteDestination().equals("Válido")) {
-                   break;
-                }
-                last = null;
-            }
-            
-            if (first != null || last != null){ // Tem ou nï¿½o tem esse if ???
-                output.printf("%d - %s - %d, ", j, party.getAbreviation(), party.getNumber());
-            	
-            	if(first != null) {
-                	output.printf("%s (%d, %d votos) ", first.getBalBoxName(), first.getBalBoxNumber(), first.getNominalVotes());
-                }
-                
-            	output.printf("/ ");
-            	
-                if(last != null) {
-                	output.printf("%s (%d, %d votos)", last.getBalBoxName(), last.getBalBoxNumber(), last.getNominalVotes());
-                }
-            	
-                output.println("");
-                
-            	//output.printf("%d - %s - %d, %s (%d, %d votos) / %s (%d, %d votos)\n", j, party.getAbreviation(), party.getNumber(), first.getBalBoxName(), first.getBalBoxNumber(), first.getNominalVotes(), last.getBalBoxName(), last.getBalBoxNumber(), last.getNominalVotes());
-                j++;
-            }
-        }
-        output.println();
-    } 
     
-    public static void report11(Map<Integer, PoliticParty> partys, PrintWriter output) {
-    	
+    public int qtdNominalVotes() {
+    	int nominal_votes = 0;
+    	for(Candidate p : this.getCandidates()) {
+            if(p.validVote()) 
+            	nominal_votes += p.getNominalVotes();
+        }
+    	return nominal_votes;
     }
+    
+    public int qtdElected() {
+    	int qtd_elected = 0;
+    	for(Candidate p : this.getCandidates()) {
+            if(p.elected()) 
+            	qtd_elected++;
+        }
+    	return qtd_elected;
+    }
+    
+    public int qtdTotalVotes() {
+    	return this.qtdNominalVotes() + this.getLegendVotes();
+    }
+    
+    //Votos totalizados por partido e nÃºmero de candidatos eleitos;
+    // public static void report6(Map<Integer, PoliticParty> partys, PrintWriter output){
+    //     int total_votes = 0;
+    //     int nominal_votes = 0;
+    //     int qtd_elect = 0;
+    //     int i = 1;
+    //     output.println("VotaÃ§Ã£o dos partidos e nÃºmero de candidatos eleitos:");
+    //     for(Integer key : partys.keySet()) {
+    //         PoliticParty party = partys.get(key);
+    //         total_votes = 0;
+    //         nominal_votes = 0;
+    //         qtd_elect = 0;
+    //         for(Candidate p : party.getCandidates()) {
+    //             if(p.getVoteDestination().equals("Vï¿½lido")){
+    //                 nominal_votes += p.getNominalVotes();
+    //             }
+    //             if( p.getSituation().equals("Eleito")){
+    //                 qtd_elect++;
+    //             }
+
+    //         }
+    //         total_votes = nominal_votes + party.getLegendVotes();
+
+    //         //output.printf("%d - %s - %d, %d votos (%d nominais e %d de legenda), %d candidatos eleitos\n", i, party.getAbreviation(), party.getNumber(), total_votes, nominal_votes, party.getLegendVotes(),qtd_elect);
+            
+    //         output.printf("%d - %s - %d, ",  i, party.getAbreviation(), party.getNumber());
+            
+    //         if(total_votes > 1) output.printf("%d votos ", total_votes);
+    //         else output.printf("%d voto ", total_votes);
+
+    //         if( nominal_votes > 1) output.printf("(%d nominais e ", nominal_votes);
+    //         else  output.printf("(%d nominal e ", nominal_votes);
+            
+    //         output.printf("%d de legenda), ", party.getLegendVotes() );
+
+    //         if(qtd_elect > 1) output.printf("%d candidatos eleitos\n", qtd_elect );
+    //         else output.printf("%d candidato eleito\n", qtd_elect );
+            
+    //         i++; 
+
+    //     }
+    //     output.println();
+    // }
+
+    // public static void report7(Map<Integer, PoliticParty> partys, PrintWriter output) {
+    //     output.println("VotaÃ§Ã£o dos partidos (apenas votos de legenda):");
+        
+    //     int total_votes = 0;
+    //     int i = 1;
+        
+    //     for(Integer key : partys.keySet()) {
+    //         PoliticParty party = partys.get(key);
+            
+            
+            
+    //         for(Candidate p : party.getCandidates()) {
+    //             if(p.getVoteDestination().equals("Vï¿½lido")){
+    //                 total_votes += p.getNominalVotes();
+    //             }
+    //         }
+            
+    //         total_votes += + party.getLegendVotes();
+    //         output.printf("%d - %s - %d, %d votos de legenda (%.2f%% do total do partido)\n", 
+    //         i, party.getAbreviation(), party.getNumber(), party.getLegendVotes(), Utils.percent(party.getLegendVotes(), total_votes));
+    //         i++;
+    //     }
+
+    //     output.println();
+    // }
+
+    // public static void report8(Map<Integer, PoliticParty> partys, PrintWriter output) {
+    // 	output.println("Primeiro e ï¿½ltimo colocados de cada partido:");
+        
+    // 	int j = 1;
+    //     for(Integer key : partys.keySet()) {
+    //         PoliticParty party = partys.get(key);
+    //         List<Candidate> list = party.getCandidates();
+            
+    //         Collections.sort(list); // Resolver depois, deve ter um lugar melhor pra ordenar essa lista.
+            
+    //         Candidate first = null;
+    //         Candidate last = null;
+
+    //         for(int i = 0; i < list.size(); i++) {
+    //             first = list.get(i);
+                
+    //             if(first.getVoteDestination().equals("Vï¿½lido")) { // Tem que ser "vï¿½lido"
+    //                 break;
+    //             }
+    //             first = null;
+    //         }
+            
+    //         for(int i = 0; i < list.size(); i++) {
+    //             last = list.get(list.size() - 1 - i);
+
+    //             if(last.getVoteDestination().equals("Vï¿½lido")) {
+    //                break;
+    //             }
+    //             last = null;
+    //         }
+            
+    //         if (first != null || last != null){ // Tem ou nï¿½o tem esse if ???
+
+    //             if( first.getNominalVotes() == 0 && last.getNominalVotes() == 0 ) continue;
+                   
+    //         	output.printf("%d - %s - %d, ", j, party.getAbreviation(), party.getNumber());
+    //         	//if(first != null) {
+    //             	output.printf("%s (%d, %d votos) ", first.getBalBoxName(), first.getBalBoxNumber(), first.getNominalVotes());
+    //             //}
+                
+    //         	output.printf("/ ");
+            	
+    //             //if(last != null) {
+    //             	output.printf("%s (%d, %d votos)", last.getBalBoxName(), last.getBalBoxNumber(), last.getNominalVotes());
+    //             //}
+            	
+    //             output.println("");
+                
+    //         	//output.printf("%d - %s - %d, %s (%d, %d votos) / %s (%d, %d votos)\n", j, party.getAbreviation(), party.getNumber(), first.getBalBoxName(), first.getBalBoxNumber(), first.getNominalVotes(), last.getBalBoxName(), last.getBalBoxNumber(), last.getNominalVotes());
+    //             j++;
+    //         }
+    //     }
+        
+    //     output.println();
+    // } 
+    
+    // public static void report11(Map<Integer, PoliticParty> partys, PrintWriter output) {
+    //     int nominal_votes = 0;
+    //     int legend_votes = 0;
+        
+    //     for(int key : partys.keySet()) {
+    //         PoliticParty party = partys.get(key);
+    //         legend_votes += party.getLegendVotes();
+
+    //         for(Candidate p : party.getCandidates()) {
+    //             if(p.getVoteDestination().equals("Vï¿½lido")){
+    //                 nominal_votes += p.getNominalVotes();
+    //             }
+    //         }
+    //     }
+
+    //     output.printf("Total de votos vÃ¡lidos:  %d\n", nominal_votes + legend_votes);
+    //     output.printf("Total de votos nominais: %d (%.2f%%)\n", nominal_votes, Utils.percent(nominal_votes, nominal_votes + legend_votes));
+    //     output.printf("Total de votos legenda:  %d (%.2f%%)\n", legend_votes, Utils.percent(legend_votes, nominal_votes + legend_votes));
+    // }
 }

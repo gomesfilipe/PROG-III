@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Formatter;
 import java.time.*;  
 
-
 public class Person {
     String name;
     char gender;
