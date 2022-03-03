@@ -7,7 +7,7 @@
  *      Author: Vítor E. Silva Souza (vitorsouza@gmail.com)
  */
 
-#include "Tokenizer.h"
+#include "../include/Tokenizer.h"
 
 namespace cpp_util {
 

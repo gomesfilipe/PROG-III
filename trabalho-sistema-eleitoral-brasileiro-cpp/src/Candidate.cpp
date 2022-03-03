@@ -1,1 +1,1 @@
-#include "Candidate.h"
+#include "../include/Candidate.h"

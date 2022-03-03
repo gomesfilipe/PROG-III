@@ -5,4 +5,10 @@
 #include <iostream>
 using namespace std;
 
+namespace cpp_util {
+
+double percent(double value, double total);
+
+}
+
 #endif

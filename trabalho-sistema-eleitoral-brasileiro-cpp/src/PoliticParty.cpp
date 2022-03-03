@@ -1,1 +1,1 @@
-#include "PoliticParty.h"
+#include "../include/PoliticParty.h"
