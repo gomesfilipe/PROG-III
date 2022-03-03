@@ -3,7 +3,7 @@
 Person::Person(const string& name, char gender, const string& birth) {
     this->name = name;
     this->gender = gender;
-    this->birth = birth;
+    this->birth = parseDate(birth, "%d/%m/%Y");
 }
 
 const string& Person::get_name() const {
@@ -13,18 +13,45 @@ const string& Person::get_name() const {
 char Person::get_gender() const {
     return this->gender;
 }
-
-const string& Person::get_birth() const {
+time_t Person::get_birth() const {
     return this->birth;
 }
 
-int Person::age() const {
-    return 0;
+int Person::age_at(const string& date) const {
+    time_t calendar = parseDate(date, "%d/%m/%Y");
+    struct tm* tm_calendar = localtime(&calendar);
+    
+    int mday_calendar = tm_calendar->tm_mday;
+    int mon_calendar = tm_calendar->tm_mon;
+    int year_calendar = tm_calendar->tm_year;
+
+    struct tm* tm_birth = localtime(&this->birth);
+    
+    int mday_birth = tm_birth->tm_mday;
+    int mon_birth = tm_birth->tm_mon;
+    int year_birth = tm_birth->tm_year;
+
+    int diff_years = year_calendar - year_birth;
+
+    if(mon_calendar > mon_birth) {
+        return diff_years;
+    
+    } else if(mon_calendar < mon_birth) {
+        return diff_years - 1;
+    
+    } else {
+        if(mday_calendar >= mday_birth) {
+            return diff_years;
+        
+        } else {
+            return diff_years - 1;
+        }
+    }
 }
 
 ostream& operator<<(ostream& out, const Person& person) {
     out << person.name << endl;
     out << person.gender << endl;
-    out << person.birth << endl;
+    out << formatDate(person.birth, "%d/%m/%Y") << endl;
     return out;
 }

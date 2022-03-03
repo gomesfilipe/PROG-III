@@ -5,24 +5,23 @@
 #include <string>
 #include <iostream>
 // #include "Tokenizer.h"
-// #include "DateUtils.h"
+#include "DateUtils.h"
 using namespace std;
+using namespace cpp_util;
 
 class Person {
     string name;
     char gender;
-    // struct dm birth;// data de nascimento (pesquisar)
-    string birth;// data de nascimento (pesquisar)
+    time_t birth;
 
 public:
     Person(const string& name, char gender, const string& birth);
 
     const string& get_name() const;
     char get_gender() const;
-    // struct dm get_birth() const;
-    const string& get_birth() const;
+    time_t get_birth() const;
 
-    int age() const;
+    int age_at(const string& date) const;
 
     friend ostream& operator<<(ostream& out, const Person& person);
 };
