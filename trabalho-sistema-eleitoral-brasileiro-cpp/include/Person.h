@@ -4,20 +4,27 @@
 #include <ctime>
 #include <string>
 #include <iostream>
+// #include "Tokenizer.h"
+// #include "DateUtils.h"
 using namespace std;
 
 class Person {
     string name;
     char gender;
-    // data de nascimento (pesquisar)
+    // struct dm birth;// data de nascimento (pesquisar)
+    string birth;// data de nascimento (pesquisar)
 
 public:
-    Person(string name, char gender, string date);
+    Person(const string& name, char gender, const string& birth);
 
     const string& get_name() const;
     char get_gender() const;
-    // get_birth() const;
+    // struct dm get_birth() const;
+    const string& get_birth() const;
 
+    int age() const;
+
+    friend ostream& operator<<(ostream& out, const Person& person);
 };
 
 #endif
