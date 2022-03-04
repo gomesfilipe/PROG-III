@@ -1,6 +1,6 @@
 #include "../include/Candidate.h"
 
-Candidate::Candidate(const string& name, char gender, const string& birth, const string& balBoxName, int balBoxNumber, int nominalVotes, const string& situation, int partyNumber, const string& voteDestination): Person(name, gender, birth) {
+Candidate::Candidate(const string& name, char gender, const string& birth, const string& balboxName, int balboxNumber, int nominalVotes, const string& situation, int partyNumber, const string& voteDestination): Person(name, gender, birth) {
     this->balboxName = balboxName;
     this->balboxNumber = balboxNumber;
     this->nominalVotes = nominalVotes;
@@ -21,7 +21,7 @@ int Candidate::get_nominal_votes() const {
     return this->nominalVotes;
 }
 
-const string& Candidate::get_situation()) const {
+const string& Candidate::get_situation() const {
     return this->situation;
 }
 
@@ -45,18 +45,30 @@ bool Candidate::valid_vote() const {
     return this->get_vote_destination() == "Válido";
 }
 
-friend ostream& operator<<(ostream& out, const Person& person) {
-    // acessar classe mãe, pesquisar 
-    out << this->balboxName << endl;
-    out << this->balboxNumber << endl;
-    out << this->nominalVotes << endl;
-    out << this->situation << endl;
-    out << this->partyNumber << endl;
-    out << this->voteDestination << endl;
+ostream& operator<<(ostream& out, const Candidate& candidate) {
+    // acessar classe mãe, pesquisar
+    out << candidate.get_name()<< endl;
+    out << candidate.get_gender() << endl;
+    out << formatDate(candidate.get_birth(), "%d/%m/%Y") << endl;
+    out << candidate.balboxName << endl;
+    out << candidate.balboxNumber << endl;
+    out << candidate.nominalVotes << endl;
+    out << candidate.situation << endl;
+    out << candidate.partyNumber << endl;
+    out << candidate.voteDestination << endl;
 
     return out;
 }
 
-friend int operator<(const Person& person) {
+int Candidate::operator<(const Candidate& candidate) {
+    if(candidate.nominalVotes == this->nominalVotes) {
+        time_t birth1 = this->get_birth();
+        time_t birth2 = candidate.get_birth();
 
+        if(birth1 < birth2) return -1;
+        else return 1;
+    
+    } else {
+        return candidate.nominalVotes - this->nominalVotes;
+    }
 }

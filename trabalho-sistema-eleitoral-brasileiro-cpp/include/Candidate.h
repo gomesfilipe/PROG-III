@@ -21,7 +21,7 @@ public:
     const string& get_balbox_name() const;
     int get_balbox_number() const;
     int get_nominal_votes() const;
-    const string& get_situation()) const;
+    const string& get_situation() const;
     int get_party_number() const;
     const string& get_vote_destination() const;
     // get party
@@ -31,8 +31,8 @@ public:
     bool elected() const;
     bool valid_vote() const;
 
-    friend ostream& operator<<(ostream& out, const Person& person);
-    friend int operator<(const Person& person);
+    friend ostream& operator<<(ostream& out, const Candidate& candidate);
+    int operator<(const Candidate& candidate);
 };
 
 #endif

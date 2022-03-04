@@ -11,8 +11,10 @@ using namespace std;
 using namespace cpp_util;
 
 int main() {
-    Person p("filipe", 'm', "20/09/2000");
-    cout << p;
-    cout << "minha idade eh " << p.age_at("19/09/2021") << endl;
+    Candidate c("filipe", 'm', "20/09/2000", "filipin", 10, 1000, "Eleito", 30, "Válido");
+    Candidate d("filipa", 'f', "18/02/2001", "filipinha", 100, 10000, "Eleito", 40, "Válido");
+
+    cout << c;
+
     return 0;
 }
