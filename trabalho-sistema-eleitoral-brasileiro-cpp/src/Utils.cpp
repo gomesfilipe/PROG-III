@@ -8,4 +8,3 @@ double percent(double value, double total) {
 }
 
 }
-

@@ -13,10 +13,16 @@ const string& Person::get_name() const {
 char Person::get_gender() const {
     return this->gender;
 }
+
 time_t Person::get_birth() const {
     return this->birth;
 }
 
+/**
+ * @brief Calculates the person's age at a specific date.
+ * @param date Specific date.
+ * @return Person's age at a specific date. 
+ */
 int Person::age_at(const string& date) const {
     time_t calendar = parseDate(date, "%d/%m/%Y");
     struct tm* tm_calendar = localtime(&calendar);
