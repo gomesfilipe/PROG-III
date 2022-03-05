@@ -32,7 +32,7 @@ public:
     bool valid_vote() const;
 
     friend ostream& operator<<(ostream& out, const Candidate& candidate);
-    int operator<(const Candidate& candidate);
+    bool operator<(const Candidate& candidate);
 };
 
 #endif

@@ -48,27 +48,28 @@ bool Candidate::valid_vote() const {
 ostream& operator<<(ostream& out, const Candidate& candidate) {
     // acessar classe mãe, pesquisar
     out << candidate.get_name()<< endl;
-    out << candidate.get_gender() << endl;
-    out << formatDate(candidate.get_birth(), "%d/%m/%Y") << endl;
-    out << candidate.balboxName << endl;
-    out << candidate.balboxNumber << endl;
-    out << candidate.nominalVotes << endl;
-    out << candidate.situation << endl;
-    out << candidate.partyNumber << endl;
-    out << candidate.voteDestination << endl;
+    // out << candidate.get_gender() << endl;
+    // out << formatDate(candidate.get_birth(), "%d/%m/%Y") << endl;
+    // out << candidate.balboxName << endl;
+    // out << candidate.balboxNumber << endl;
+    // out << candidate.nominalVotes << endl;
+    // out << candidate.situation << endl;
+    // out << candidate.partyNumber << endl;
+    // out << candidate.voteDestination << endl;
 
     return out;
 }
 
-int Candidate::operator<(const Candidate& candidate) {
+bool Candidate::operator<(const Candidate& candidate) {
     if(candidate.nominalVotes == this->nominalVotes) {
         time_t birth1 = this->get_birth();
         time_t birth2 = candidate.get_birth();
 
-        if(birth1 < birth2) return -1;
-        else return 1;
+        if(birth1 < birth2) return true;
+        else return false;
     
     } else {
-        return candidate.nominalVotes - this->nominalVotes;
+        if(candidate.nominalVotes > this->nominalVotes) return false;
+        else return true;
     }
 }

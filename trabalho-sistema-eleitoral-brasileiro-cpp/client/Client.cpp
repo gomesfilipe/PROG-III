@@ -11,10 +11,18 @@ using namespace std;
 using namespace cpp_util;
 
 int main() {
-    Candidate c("filipe", 'm', "20/09/2000", "filipin", 10, 1000, "Eleito", 30, "Válido");
-    Candidate d("filipa", 'f', "18/02/2001", "filipinha", 100, 10000, "Eleito", 40, "Válido");
+    vector<PoliticParty*> partys = read_politic_party("partidos.csv");
+    vector<Candidate*> candidates = read_candidate("candidatos.csv");
 
-    cout << c;
+    for(Candidate* c : candidates) {
+        cout << *c;
+        delete c;
+    }
+
+    for(PoliticParty* p : partys) {
+        cout << *p;
+        delete p;
+    }
 
     return 0;
 }
