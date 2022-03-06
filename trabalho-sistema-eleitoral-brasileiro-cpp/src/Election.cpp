@@ -64,13 +64,26 @@ void Election::report_11() const {
 }
 
 void Election::insert_candidates_in_partys(vector<Candidate*> candidates, vector<PoliticParty*> partys) {
-
+    for(Candidate* c : candidates) {
+        int key = c->get_party_number();
+        PoliticParty* party = search_party(partys, key);
+        party->add_candidate(c);
+    }
 }
 
 void Election::insert_partys_in_candidates(vector<Candidate*> candidates, vector<PoliticParty*> partys) {
-
+    for(Candidate* c : candidates) {
+    	int key = c->get_party_number();
+        PoliticParty* party = search_party(partys, key);  
+        c->set_party(party);
+    }
 }
 
 PoliticParty* Election::search_party(vector<PoliticParty*> partys, int key) {
+    for(PoliticParty* p : partys) {
+        if(p->get_number() == key) {
+            return p;
+        }
+    }
     return NULL;
 }
