@@ -20,7 +20,7 @@ int Election::qtd_elected() const {
 }
 
 void Election::report_1() const {
-
+    cout << "Número de vagas: " << this->qtd_elected() << endl << endl;
 }
 
 void Election::report_2() const {

@@ -1,2 +1,0 @@
-filipe gomes
-testando ler arquivo
