@@ -5,6 +5,9 @@
 #include <iostream>
 using namespace std;
 #include "Person.h"
+#include "Candidate.h"
+
+class PoliticParty;
 
 class Candidate: public Person {
     string balboxName;
@@ -13,7 +16,7 @@ class Candidate: public Person {
     string situation;
     int partyNumber;
     string voteDestination;
-    // PoliticParty party;
+    PoliticParty* party;
 
 public:
     Candidate(const string& name, char gender, const string& birth, const string& balBoxName, int balBoxNumber, int nominalVotes, const string& situation, int partyNumber, const string& voteDestination);
@@ -24,9 +27,9 @@ public:
     const string& get_situation() const;
     int get_party_number() const;
     const string& get_vote_destination() const;
-    // get party
+    PoliticParty* get_party() const;
 
-    // set party
+    void set_party(PoliticParty* party);
 
     bool elected() const;
     bool valid_vote() const;

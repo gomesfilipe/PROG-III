@@ -7,6 +7,7 @@ Candidate::Candidate(const string& name, char gender, const string& birth, const
     this->situation = situation;
     this->partyNumber = partyNumber;
     this->voteDestination = voteDestination;
+    this->party = NULL;
 }
 
 const string& Candidate::get_balbox_name() const {
@@ -33,9 +34,13 @@ const string& Candidate::get_vote_destination() const {
     return this->voteDestination;
 }
 
-// get party
+PoliticParty* Candidate::get_party() const {
+    return this->party;
+}
 
-// set party
+void Candidate::set_party(PoliticParty* party) {
+    this->party = party;
+}
 
 bool Candidate::elected() const {
     return this->get_situation() == "Eleito";
@@ -46,7 +51,6 @@ bool Candidate::valid_vote() const {
 }
 
 ostream& operator<<(ostream& out, const Candidate& candidate) {
-    // acessar classe mãe, pesquisar
     out << candidate.get_name()<< endl;
     // out << candidate.get_gender() << endl;
     // out << formatDate(candidate.get_birth(), "%d/%m/%Y") << endl;

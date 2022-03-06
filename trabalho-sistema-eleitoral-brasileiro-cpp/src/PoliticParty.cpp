@@ -47,6 +47,10 @@ int PoliticParty::qtd_total_votes() const {
     return this->qtd_nominal_votes() + this->get_legend_votes();
 }
 
+void PoliticParty::add_candidate(Candidate* candidate) {
+    this->candidates.push_back(candidate);
+}
+
 ostream& operator<<(ostream& out, const PoliticParty& politicParty) {
     out << "Name: " << politicParty.name << endl;
     // out << "Abreviation: " << politicParty.abreviation << endl;

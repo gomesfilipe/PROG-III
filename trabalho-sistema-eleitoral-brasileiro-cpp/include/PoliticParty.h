@@ -23,6 +23,8 @@ public:
     int get_legend_votes() const;
     vector<Candidate*> get_candidates() const;
 
+    void add_candidate(Candidate* candidate);
+
     int qtd_nominal_votes() const;
     int qtd_elected() const;
     int qtd_total_votes() const;
