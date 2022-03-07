@@ -30,12 +30,14 @@ public:
     int qtd_total_votes() const;
 
     friend ostream& operator<<(ostream& out, const PoliticParty& politicParty);
-
-    // ~PoliticParty();
 };
 
-int comparator_legend_votes(const PoliticParty& m , const PoliticParty& n);
-int comparator_nominal_votes(const PoliticParty& m , const PoliticParty& n);
-int comparator_total_votes(const PoliticParty& m , const PoliticParty& n);
+bool comparator_legend_votes(PoliticParty* m , PoliticParty* n);
+bool comparator_nominal_votes(PoliticParty* m , PoliticParty* n);
+bool comparator_total_votes(PoliticParty* m , PoliticParty* n);
+
+// int comparator_legend_votes(const PoliticParty& m , const PoliticParty& n);
+// int comparator_nominal_votes(const PoliticParty& m , const PoliticParty& n);
+// int comparator_total_votes(const PoliticParty& m , const PoliticParty& n);
 
 #endif

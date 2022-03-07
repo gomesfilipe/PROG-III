@@ -5,8 +5,10 @@
 #include <string>
 #include <iostream>
 using namespace std;
+#include "NumberUtils.h"
 #include "PoliticParty.h"
 #include "Candidate.h"
+#include "Utils.h"
 
 class Election {
     vector<Candidate*> candidates;

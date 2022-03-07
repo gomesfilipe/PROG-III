@@ -60,57 +60,112 @@ ostream& operator<<(ostream& out, const PoliticParty& politicParty) {
     return out;
 }
 
-int comparator_legend_votes(const PoliticParty& m , const PoliticParty& n) {
-    int legend_mvotes = m.get_legend_votes();
-    int legend_nvotes = n.get_legend_votes();
+bool comparator_legend_votes(PoliticParty* m , PoliticParty* n) {
+    int legend_mvotes = m->get_legend_votes();
+    int legend_nvotes = n->get_legend_votes();
     
     if(legend_mvotes == legend_nvotes) {
-        int nominal_nvotes = n.qtd_nominal_votes();
-        int nominal_mvotes = m.qtd_nominal_votes();
+        int nominal_nvotes = n->qtd_nominal_votes();
+        int nominal_mvotes = m->qtd_nominal_votes();
         
         if(nominal_nvotes == nominal_mvotes){
-            return m.get_number() - n.get_number(); 
+            return m->get_number() - n->get_number() < 0 ? true : false; 
         }
         else{
-            return nominal_nvotes - nominal_mvotes;
+            return nominal_nvotes - nominal_mvotes < 0 ? true : false;
         }
 
     } else {
-        return legend_nvotes - legend_mvotes;
+        return legend_nvotes - legend_mvotes < 0 ? true : false;
     }
 }
 
-int comparator_nominal_votes(const PoliticParty& m , const PoliticParty& n) {
-    vector<Candidate*> mvector = m.get_candidates();
-    vector<Candidate*> nvector = n.get_candidates();
+bool comparator_nominal_votes(PoliticParty* m , PoliticParty* n) {
+    vector<Candidate*> mvector = m->get_candidates();
+    vector<Candidate*> nvector = n->get_candidates();
         
     int nominal_mvotes = 0;
     int nominal_nvotes = 0;
     
     for(Candidate* c : mvector) {
-        nominal_mvotes  = c->get_nominal_votes();
+        nominal_mvotes = c->get_nominal_votes();
         if(c->valid_vote()) break;
     }
     
     for(Candidate* c : nvector) {
-        nominal_nvotes  = c->get_nominal_votes();
+        nominal_nvotes = c->get_nominal_votes();
         if(c->valid_vote()) break;   
     }
     
     if(nominal_mvotes == nominal_nvotes) {
-        return m.get_number() - n.get_number(); 
+        return m->get_number() - n->get_number() < 0 ? true : false; 
     } else {
-        return nominal_nvotes - nominal_mvotes;
+        return nominal_nvotes - nominal_mvotes < 0 ? true : false;
     }
 }
 
-int comparator_total_votes(const PoliticParty& m , const PoliticParty& n) {
-    int total_mvotes = m.qtd_total_votes();
-    int total_nvotes = n.qtd_total_votes();
+bool comparator_total_votes(PoliticParty* m , PoliticParty* n) {
+    int total_mvotes = m->qtd_total_votes();
+    int total_nvotes = n->qtd_total_votes();
 
     if(total_mvotes == total_nvotes) {
-        return n.get_number() - m.get_number(); 
+        return n->get_number() - m->get_number() < 0 ? true : false; 
     } else {
-        return total_nvotes - total_mvotes;
+        return total_nvotes - total_mvotes < 0 ? true : false;
     }
 }
+
+// int comparator_legend_votes(const PoliticParty& m , const PoliticParty& n) {
+//     int legend_mvotes = m.get_legend_votes();
+//     int legend_nvotes = n.get_legend_votes();
+    
+//     if(legend_mvotes == legend_nvotes) {
+//         int nominal_nvotes = n.qtd_nominal_votes();
+//         int nominal_mvotes = m.qtd_nominal_votes();
+        
+//         if(nominal_nvotes == nominal_mvotes){
+//             return m.get_number() - n.get_number(); 
+//         }
+//         else{
+//             return nominal_nvotes - nominal_mvotes;
+//         }
+
+//     } else {
+//         return legend_nvotes - legend_mvotes;
+//     }
+// }
+
+// int comparator_nominal_votes(const PoliticParty& m , const PoliticParty& n) {
+//     vector<Candidate*> mvector = m.get_candidates();
+//     vector<Candidate*> nvector = n.get_candidates();
+        
+//     int nominal_mvotes = 0;
+//     int nominal_nvotes = 0;
+    
+//     for(Candidate* c : mvector) {
+//         nominal_mvotes  = c->get_nominal_votes();
+//         if(c->valid_vote()) break;
+//     }
+    
+//     for(Candidate* c : nvector) {
+//         nominal_nvotes  = c->get_nominal_votes();
+//         if(c->valid_vote()) break;   
+//     }
+    
+//     if(nominal_mvotes == nominal_nvotes) {
+//         return m.get_number() - n.get_number(); 
+//     } else {
+//         return nominal_nvotes - nominal_mvotes;
+//     }
+// }
+
+// int comparator_total_votes(const PoliticParty& m , const PoliticParty& n) {
+//     int total_mvotes = m.qtd_total_votes();
+//     int total_nvotes = n.qtd_total_votes();
+
+//     if(total_mvotes == total_nvotes) {
+//         return n.get_number() - m.get_number(); 
+//     } else {
+//         return total_nvotes - total_mvotes;
+//     }
+// }

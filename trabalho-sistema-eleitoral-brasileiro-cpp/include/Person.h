@@ -21,6 +21,7 @@ public:
     char get_gender() const;
     time_t get_birth() const;
 
+    int age_at(const time_t& date) const;
     int age_at(const string& date) const;
 
     friend ostream& operator<<(ostream& out, const Person& person);

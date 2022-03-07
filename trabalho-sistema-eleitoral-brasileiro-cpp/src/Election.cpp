@@ -20,47 +20,124 @@ int Election::qtd_elected() const {
 }
 
 void Election::report_1() const {
-    cout << "Número de vagas: " << this->qtd_elected() << endl << endl;
+    cout << "Número de vagas:" << this->qtd_elected() << endl << endl;
 }
 
 void Election::report_2() const {
-
+    cout << "Vereadores Eleitos: " << endl;
+    
+    int i = 1;
+    for(Candidate *c : this->candidates) {
+        if(c->elected()) {
+            string abreviation = c->get_party()->get_abreviation();
+            cout << i++ << " - " << c->get_name() << " / " << c->get_balbox_name() << " (" << abreviation << ", " << c->get_nominal_votes() << ")" << endl;
+        }
+    }
+    cout << endl;
 }
 
 void Election::report_3() const {
-
+    cout << "Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
+    
+    cout << endl;
 }
 
 void Election::report_4() const {
+    cout << "Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:" << endl;
+    cout << "(com sua posição no ranking de mais votados)" << endl;
 
+    cout << endl;
 }
 
 void Election::report_5() const {
+    cout << "Eleitos, que se beneficiaram do sistema proporcional:" << endl;
+    cout << "(com sua posição no ranking de mais votados)" << endl;
 
+    cout << endl;
 }
 
 void Election::report_6() const {
+    cout << "Votação dos partidos e número de candidatos eleitos:" << endl;
 
+    cout << endl;
 }
 
 void Election::report_7() const {
+    cout << "Votação dos partidos (apenas votos de legenda):" << endl;
 
+    cout << endl;
 }
 
 void Election::report_8() const {
+    cout << "Primeiro e último colocados de cada partido:" << endl;
 
+    cout << endl;
 }
 
 void Election::report_9() const {
+    int lt30 = 0, lt40 = 0, lt50 = 0, lt60 = 0, bt60 = 0;
 
+    for(Candidate* p : this->candidates) {
+        if(p->elected()) {
+            int age = p->age_at(this->date);
+            if (age >= 0 && age < 30)       lt30++;
+            else if (age >= 30 && age < 40) lt40++;
+            else if (age >= 40 && age < 50) lt50++;
+            else if (age >= 50 && age < 60) lt60++;
+            else if (age >= 60)             bt60++;    
+        }
+    }
+
+    int total = lt30 + lt40 + lt50 + lt60 + bt60;
+    double lt30_percent = percent(lt30, total);
+    double lt40_percent = percent(lt40, total);
+    double lt50_percent = percent(lt50, total);
+    double lt60_percent = percent(lt60, total);
+    double bt60_percent = percent(bt60, total);
+
+    cout << "Eleitos, por faixa etária (na data da eleição):" << endl;
+    cout << "      Idade < 30: " << lt30 << " (" << formatDoubleCurrency(lt30_percent, LOCALE_PT_BR) << "%)" << endl;
+    cout << "30 <= Idade < 40: " << lt40 << " (" << formatDoubleCurrency(lt40_percent, LOCALE_PT_BR) << "%)" << endl;
+    cout << "40 <= Idade < 50: " << lt50 << " (" << formatDoubleCurrency(lt50_percent, LOCALE_PT_BR) << "%)" << endl;
+    cout << "50 <= Idade < 60: " << lt60 << " (" << formatDoubleCurrency(lt60_percent, LOCALE_PT_BR) << "%)" << endl;
+    cout << "60 <= Idade     : " << bt60 << " (" << formatDoubleCurrency(bt60_percent, LOCALE_PT_BR) << "%)" << endl;
+    cout << endl;
 }
 
 void Election::report_10() const {
+    int male = 0, female = 0;
+        
+    for(Candidate* p : this->candidates) {
+        if(p->elected()) {
+            if(p->get_gender() == 'F') female++;  
+            else if (p->get_gender() == 'M') male++;    
+        }
+    }
+    
+    double female_percent = percent(female, female + male);
+    double male_percent = percent(male, female + male);
 
+    cout << "Eleitos, por sexo:" << endl;
+    cout << "Feminino: " << female << " (" << formatDoubleCurrency(female_percent, LOCALE_PT_BR) << "%)" << endl;
+    cout << "Masculino: " << male << " (" << formatDoubleCurrency(male_percent, LOCALE_PT_BR) << "%)" << endl;
+    cout << endl; 
 }
 
 void Election::report_11() const {
+    int nominal_votes = 0;
+    int legend_votes = 0;
+    
+    for(PoliticParty* p : partys) {
+        nominal_votes += p->qtd_nominal_votes();
+        legend_votes += p->get_legend_votes();
+    }
 
+    int total = nominal_votes + legend_votes;
+    double nominal_percent = percent(nominal_votes, total);
+    double legend_percent = percent(legend_votes, total);
+    cout << "Total de votos válidos: " <<  total << endl;
+    cout << "Total de nominais: " <<  nominal_votes <<  " ("  << formatDoubleCurrency(nominal_percent, LOCALE_PT_BR) << "%)" << endl;
+    cout << "Total de votos de legenda: " <<  legend_votes <<  " ("  << formatDoubleCurrency(legend_percent, LOCALE_PT_BR) << "%)" << endl;
 }
 
 void Election::insert_candidates_in_partys(vector<Candidate*> candidates, vector<PoliticParty*> partys) {
@@ -81,9 +158,7 @@ void Election::insert_partys_in_candidates(vector<Candidate*> candidates, vector
 
 PoliticParty* Election::search_party(vector<PoliticParty*> partys, int key) {
     for(PoliticParty* p : partys) {
-        if(p->get_number() == key) {
-            return p;
-        }
+        if(p->get_number() == key) return p;
     }
     return NULL;
 }
