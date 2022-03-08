@@ -92,4 +92,4 @@ clean: # Remove pasta com os arquivos objeto e o executável.
 	-rm -f $(TARGET)
 
 run: # Executa o programa com valgrind com uma entrada específica.
-	valgrind ./$(TARGET)
+	valgrind ./$(TARGET) candidatos.csv partidos.csv 15/11/2020

@@ -1,6 +1,8 @@
 #ifndef PERSON_H_
 #define PERSON_H_
 
+#include <algorithm>
+#include <vector>
 #include <ctime>
 #include <string>
 #include <iostream>

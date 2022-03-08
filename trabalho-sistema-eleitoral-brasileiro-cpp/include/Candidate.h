@@ -1,11 +1,11 @@
 #ifndef CANDIDATE_H_
 #define CANDIDATE_H_
 
+#include <algorithm>
 #include <string>
 #include <iostream>
-using namespace std;
 #include "Person.h"
-#include "Candidate.h"
+using namespace std;
 
 class PoliticParty;
 
@@ -35,7 +35,9 @@ public:
     bool valid_vote() const;
 
     friend ostream& operator<<(ostream& out, const Candidate& candidate);
-    bool operator<(const Candidate& candidate);
+    // bool operator<(const Candidate& candidate);
 };
+
+bool comparator_candidates(const Candidate* m, const Candidate* n);
 
 #endif

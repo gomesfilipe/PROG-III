@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "Candidate.h"
 using namespace std;
 
@@ -32,9 +33,9 @@ public:
     friend ostream& operator<<(ostream& out, const PoliticParty& politicParty);
 };
 
-bool comparator_legend_votes(PoliticParty* m , PoliticParty* n);
-bool comparator_nominal_votes(PoliticParty* m , PoliticParty* n);
-bool comparator_total_votes(PoliticParty* m , PoliticParty* n);
+bool comparator_legend_votes(const PoliticParty* m , const PoliticParty* n);
+bool comparator_nominal_votes(const PoliticParty* m , const PoliticParty* n);
+bool comparator_total_votes(const PoliticParty* m , const PoliticParty* n);
 
 // int comparator_legend_votes(const PoliticParty& m , const PoliticParty& n);
 // int comparator_nominal_votes(const PoliticParty& m , const PoliticParty& n);

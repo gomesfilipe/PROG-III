@@ -1,14 +1,15 @@
 #ifndef ELECTION_H_
 #define ELECTION_H_
 
+#include <algorithm>
 #include <vector>
 #include <string>
 #include <iostream>
-using namespace std;
 #include "NumberUtils.h"
 #include "PoliticParty.h"
 #include "Candidate.h"
 #include "Utils.h"
+using namespace std;
 
 class Election {
     vector<Candidate*> candidates;
@@ -36,8 +37,6 @@ private:
     static void insert_candidates_in_partys(vector<Candidate*> candidates, vector<PoliticParty*> partys);
     static void insert_partys_in_candidates(vector<Candidate*> candidates, vector<PoliticParty*> partys);
     static PoliticParty* search_party(vector<PoliticParty*> partys, int key);
-
 };
-
 
 #endif

@@ -60,7 +60,7 @@ ostream& operator<<(ostream& out, const PoliticParty& politicParty) {
     return out;
 }
 
-bool comparator_legend_votes(PoliticParty* m , PoliticParty* n) {
+bool comparator_legend_votes(const PoliticParty* m , const PoliticParty* n) {
     int legend_mvotes = m->get_legend_votes();
     int legend_nvotes = n->get_legend_votes();
     
@@ -80,7 +80,7 @@ bool comparator_legend_votes(PoliticParty* m , PoliticParty* n) {
     }
 }
 
-bool comparator_nominal_votes(PoliticParty* m , PoliticParty* n) {
+bool comparator_nominal_votes(const PoliticParty* m , const PoliticParty* n) {
     vector<Candidate*> mvector = m->get_candidates();
     vector<Candidate*> nvector = n->get_candidates();
         
@@ -104,7 +104,7 @@ bool comparator_nominal_votes(PoliticParty* m , PoliticParty* n) {
     }
 }
 
-bool comparator_total_votes(PoliticParty* m , PoliticParty* n) {
+bool comparator_total_votes(const PoliticParty* m , const PoliticParty* n) {
     int total_mvotes = m->qtd_total_votes();
     int total_nvotes = n->qtd_total_votes();
 
