@@ -74,7 +74,7 @@ bool comparator_candidates(const Candidate* m, const Candidate* n) {
         else return false;
     
     } else {
-        if(n->get_nominal_votes() > m->get_nominal_votes()) return false;
+        if(n->get_nominal_votes() < m->get_nominal_votes()) return false;
         else return true;
     }
 }

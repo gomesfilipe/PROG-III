@@ -24,7 +24,7 @@ int PoliticParty::get_legend_votes() const {
     return this->legendVotes;
 }
 
-vector<Candidate*> PoliticParty::PoliticParty::get_candidates() const {
+const vector<Candidate*>& PoliticParty::get_candidates() const {
     return this->candidates;
 }
 
@@ -50,6 +50,15 @@ int PoliticParty::qtd_total_votes() const {
 
 void PoliticParty::add_candidate(Candidate* candidate) {
     this->candidates.push_back(candidate);
+}
+
+Candidate* PoliticParty::more_nominal_votes() const {
+    Candidate* more = NULL;
+    for(Candidate* c : this->candidates) {
+        if(more == NULL || c->get_nominal_votes() > more->get_nominal_votes()) more = c;
+    }
+
+    return more;
 }
 
 ostream& operator<<(ostream& out, const PoliticParty& politicParty) {
@@ -85,18 +94,24 @@ bool comparator_nominal_votes(const PoliticParty* m , const PoliticParty* n) {
     vector<Candidate*> mvector = m->get_candidates();
     vector<Candidate*> nvector = n->get_candidates();
         
-    int nominal_mvotes = 0;
-    int nominal_nvotes = 0;
+    // int nominal_mvotes = 0;
+    // int nominal_nvotes = 0;
+   
+    Candidate* cm = m->more_nominal_votes();
+    Candidate* cn = n->more_nominal_votes();
     
-    for(Candidate* c : mvector) {
-        nominal_mvotes = c->get_nominal_votes();
-        if(c->valid_vote()) break;
-    }
+    int nominal_mvotes = cm->get_nominal_votes();
+    int nominal_nvotes = cn->get_nominal_votes();
+
+    // for(Candidate* c : mvector) {
+    //     nominal_mvotes = c->get_nominal_votes();
+    //     if(c->valid_vote()) break;
+    // }
     
-    for(Candidate* c : nvector) {
-        nominal_nvotes = c->get_nominal_votes();
-        if(c->valid_vote()) break;   
-    }
+    // for(Candidate* c : nvector) {
+    //     nominal_nvotes = c->get_nominal_votes();
+    //     if(c->valid_vote()) break;   
+    // }
     
     if(nominal_mvotes == nominal_nvotes) {
         return m->get_number() - n->get_number() < 0 ? true : false; 

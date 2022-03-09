@@ -11,6 +11,7 @@ using namespace cpp_util;
 int main(int argc, char** argv) {
     if(argc != 4) {
         cout << "Incorrect number of parameters." << endl;
+        return 0;
     }
     
     string candidates_file = argv[1];
@@ -27,23 +28,16 @@ int main(int argc, char** argv) {
     e.report_3();  // ok
     e.report_4();  // ok
     e.report_5();  // ok
-    // e.report_6();
-    // e.report_7();
-    // e.report_8();
+    e.report_6();  // ok
+    e.report_7();  // ok
+    e.report_8();  // ok
     e.report_9();  // ok
     e.report_10(); // ok
     e.report_11(); // ok
 
-    for(PoliticParty* p : partys) {
-        // cout << *p;
-        delete p;
-    }
-
-    for(Candidate* c : candidates) {
-        // cout << *c;
-        delete c;
-    }
-
+    for(PoliticParty* p : partys) delete p;
+    for(Candidate* c : candidates) delete c;
+    
     return 0;
 }
 
@@ -56,5 +50,4 @@ int main(int argc, char** argv) {
 
 //TODO
 // Verificar se os true e false estão corretos nas funções de comparação.
-// Terminar relatórios.
 // Exceções.

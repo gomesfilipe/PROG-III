@@ -92,7 +92,7 @@ void Election::report_5() {
     int qtd_elect = this->qtd_elected();
     int elect_proportional = 0, index = 0;
 
-    for(Candidate* p : candidates) {
+    for(Candidate* p : this->candidates) {
         if(p->elected()) {
             elect_proportional++;
 
@@ -114,6 +114,29 @@ void Election::report_6() {
     
     cout << "Votação dos partidos e número de candidatos eleitos:" << endl;
 
+    int i = 1;
+    for(PoliticParty* p : this->partys) {
+        int nominal_votes = p->qtd_nominal_votes();
+        int qtd_elected = p->qtd_elected();
+        int total_votes = p->qtd_total_votes();
+
+        cout << i << " - " << p->get_abreviation() << " - " << p->get_number() << ", ";
+
+        if(total_votes > 1) cout << total_votes << " votos ";
+        else cout << total_votes << " voto ";
+
+        if(nominal_votes > 1) cout << "(" << nominal_votes << " nominais e ";
+        else cout << "(" << nominal_votes << " nominal e ";
+
+        cout << p->get_legend_votes() << " de legenda), ";
+
+        if(qtd_elected > 1) cout << qtd_elected << " candidatos eleitos" << endl;
+        else cout << qtd_elected << " candidato eleito" << endl;
+
+        i++;
+    }
+
+
     cout << endl;
 }
 
@@ -122,13 +145,89 @@ void Election::report_7() {
     
     cout << "Votação dos partidos (apenas votos de legenda):" << endl;
 
+    int total_votes = 0;
+    int i = 1;
+
+    for(PoliticParty* p : this->partys) {
+        total_votes = p->qtd_total_votes();
+
+        cout << i << " - " << p->get_abreviation() << " - " << p->get_number() << ", ";
+
+        if(p->get_legend_votes() > 1) cout << p->get_legend_votes() << " votos de legenda ";
+        else cout << p->get_legend_votes() << " voto de legenda ";
+
+        double percent_legend_votes = percent(p->get_legend_votes(), total_votes);
+
+        if(total_votes != 0) cout << "(" << formatDoubleCurrency(percent_legend_votes, LOCALE_PT_BR) << "% do total do partido)" << endl; 
+        else cout << "proporção não calculada, 0 voto no partido)" << endl;
+
+        i++;
+    }
+
     cout << endl;
 }
 
 void Election::report_8() {
-    sort(this->partys.begin(), this->partys.end(), comparator_nominal_votes);
+    for(PoliticParty* p : this->partys) {
+        vector<Candidate*> vector_candidates = p->get_candidates();
+        sort(vector_candidates.begin(), vector_candidates.end(), comparator_candidates);
+    }
     
+    sort(this->partys.begin(), this->partys.end(), comparator_nominal_votes);
+
     cout << "Primeiro e último colocados de cada partido:" << endl;
+
+    int j = 1;
+
+    
+
+    
+    for(PoliticParty* p : this->partys) {
+        vector<Candidate*> vector_candidates = p->get_candidates();
+        // sort(vector_candidates.begin(), vector_candidates.end(), comparator_candidates);
+
+        Candidate* first = NULL;
+        Candidate* last = NULL;
+
+        for(int i = 0; i < vector_candidates.size(); i++) {
+            first = vector_candidates.at(i);
+
+            if(first->valid_vote()) break;
+
+            first = NULL;
+        }
+
+        for(int i = 0; i < vector_candidates.size(); i++) {
+            last = vector_candidates.at(vector_candidates.size() - 1 - i);
+
+            if(last->valid_vote()) break;
+
+            last = NULL;
+        }
+
+        if(first != NULL || last != NULL) {
+            cout << p->qtd_nominal_votes() << " // ";
+            
+            if(first->get_nominal_votes() == 0 && last->get_nominal_votes() == 0) continue;
+
+            cout << j << " - " << p->get_abreviation() << " - " << p->get_number() << ", ";
+            cout << first->get_balbox_name() << " (" << first->get_balbox_number() << ", ";
+
+            if(first->get_nominal_votes() == 0 || first->get_nominal_votes() == 1)
+                cout << first->get_nominal_votes() << " voto) ";
+            else
+                cout << first->get_nominal_votes() << " votos) ";
+
+            cout << "/ " << last->get_balbox_name() << " (" << last->get_balbox_number() << ", ";
+
+            if(last->get_nominal_votes() == 0 || last->get_nominal_votes() == 1)
+                cout << last->get_nominal_votes() << " voto) " << endl;
+            else
+                cout << last->get_nominal_votes() << " votos) " << endl;
+
+            j++;
+        }
+    }
 
     cout << endl;
 }
@@ -207,9 +306,8 @@ void Election::insert_candidates_in_partys(vector<Candidate*> candidates, vector
     }
 
     // for(PoliticParty* p : partys) {
-    //     vector<Candidate*> party_candidates = p->get_candidates();
-    //     cout << "fora " << &party_candidates;
-    //     sort(party_candidates.begin(), party_candidates.end(), comparator_candidates);
+    //     vector<Candidate*> vector_candidates = p->get_candidates();
+    //     sort(vector_candidates.begin(), vector_candidates.end(), comparator_candidates);
     // }
 }
 

@@ -22,13 +22,13 @@ public:
     const string& get_abreviation() const;
     int get_number() const;
     int get_legend_votes() const;
-    vector<Candidate*> get_candidates() const;
-
-    void add_candidate(Candidate* candidate);
+    const vector<Candidate*>& get_candidates() const;
 
     int qtd_nominal_votes() const;
     int qtd_elected() const;
     int qtd_total_votes() const;
+    void add_candidate(Candidate* candidate);
+    Candidate* more_nominal_votes() const;
 
     friend ostream& operator<<(ostream& out, const PoliticParty& politicParty);
 };
