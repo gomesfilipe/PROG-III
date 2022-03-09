@@ -49,10 +49,10 @@
 # 	@rm *.o vereadores *.csv *.txt
 
 # all:
-# 	g++ client/Client.cpp src/*.cpp -o main
+# 	g++ *.cpp -o main
 
 # run:
-# 	./main
+# 	valgrind ./main candidatos.csv partidos.csv 15/11/2020
 
 TARGET := vereadores
 LIBS := -lm

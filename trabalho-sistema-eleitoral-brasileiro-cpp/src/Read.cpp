@@ -1,6 +1,5 @@
 #include "../include/Read.h"
-
-#define TAM_BUFFER 200
+// #include "Read.h"
 
 vector<PoliticParty*> read_politic_party(const string& fileName) {
     vector<PoliticParty*> partys;

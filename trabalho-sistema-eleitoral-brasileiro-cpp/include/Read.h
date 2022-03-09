@@ -4,13 +4,13 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-using namespace std;
 #include <vector>
 #include <exception>
 #include "Person.h"
 #include "Candidate.h"
 #include "PoliticParty.h"
 #include "Tokenizer.h"
+using namespace std;
 
 vector<PoliticParty*> read_politic_party(const string& fileName);
 

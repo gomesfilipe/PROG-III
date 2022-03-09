@@ -1,4 +1,5 @@
 #include "../include/Candidate.h"
+// #include "Candidate.h"
 
 Candidate::Candidate(const string& name, char gender, const string& birth, const string& balboxName, int balboxNumber, int nominalVotes, const string& situation, int partyNumber, const string& voteDestination): Person(name, gender, birth) {
     this->balboxName = balboxName;

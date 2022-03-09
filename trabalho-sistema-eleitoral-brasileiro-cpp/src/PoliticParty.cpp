@@ -1,4 +1,5 @@
 #include "../include/PoliticParty.h"
+// #include "PoliticParty.h"
 
 PoliticParty::PoliticParty(const string& name, const string& abreviation, int number, int legendVotes) {
     this->name = name;

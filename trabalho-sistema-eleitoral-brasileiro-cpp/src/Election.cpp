@@ -1,10 +1,12 @@
+// #include "Election.h"
 #include "../include/Election.h"
 
-Election::Election(vector<Candidate*>& candidates, vector<PoliticParty*>& partys, const string& date) {
-    insert_candidates_in_partys(candidates, partys);
-    insert_partys_in_candidates(candidates, partys);
-    
+Election::Election(const vector<Candidate*>& candidates, const vector<PoliticParty*>& partys, const string& date) {
     this->candidates = candidates;
+
+    insert_candidates_in_partys(this->candidates, partys);
+    insert_partys_in_candidates(this->candidates, partys);
+
     this->partys = partys;
     this->date = parseDate(date, "%d/%m/%Y");
 }
@@ -23,16 +25,9 @@ void Election::report_1() const {
     cout << "Número de vagas:" << this->qtd_elected() << endl << endl;
 }
 
-void Election::report_2() const {
-    // sort(this->candidates.begin(), this->candidates.end());
-    // sort(this->partys.begin(), this->partys.end(), comparator_legend_votes);
-    // auto x = this->candidates.begin();
-    // auto y = this->candidates.end();
+void Election::report_2() {
     sort(this->candidates.begin(), this->candidates.end(), comparator_candidates);
-    // vector<int> a;
-    // sort(a.begin(), a.end());
-    // sort(x, y, comparator_candidates);
-    
+
     cout << "Vereadores Eleitos: " << endl;
     
     int i = 1;
@@ -45,8 +40,8 @@ void Election::report_2() const {
     cout << endl;
 }
 
-void Election::report_3() const {
-    // sort(this->candidates.begin(), this->candidates.end(), comparator_candidates);
+void Election::report_3() {
+    sort(this->candidates.begin(), this->candidates.end(), comparator_candidates);
     cout << "Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
     
     int qtd_elect = this->qtd_elected();
@@ -64,8 +59,8 @@ void Election::report_3() const {
     cout << endl;
 }
 
-void Election::report_4() const {
-    // sort(this->candidates.begin(), this->candidates.end(), comparator_candidates);
+void Election::report_4() {
+    sort(this->candidates.begin(), this->candidates.end(), comparator_candidates);
     
     cout << "Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:" << endl;
     cout << "(com sua posição no ranking de mais votados)" << endl;
@@ -88,8 +83,8 @@ void Election::report_4() const {
     cout << endl;
 }
 
-void Election::report_5() const {
-    // sort(this->candidates.begin(), this->candidates.end(), comparator_candidates);
+void Election::report_5() {
+    sort(this->candidates.begin(), this->candidates.end(), comparator_candidates);
     
     cout << "Eleitos, que se beneficiaram do sistema proporcional:" << endl;
     cout << "(com sua posição no ranking de mais votados)" << endl;
@@ -114,24 +109,24 @@ void Election::report_5() const {
     cout << endl;
 }
 
-void Election::report_6() const {
-    // sort(this->partys.begin(), this->partys.end(), comparator_total_votes);
+void Election::report_6() {
+    sort(this->partys.begin(), this->partys.end(), comparator_total_votes);
     
     cout << "Votação dos partidos e número de candidatos eleitos:" << endl;
 
     cout << endl;
 }
 
-void Election::report_7() const {
-    // sort(this->partys.begin(), this->partys.end(), comparator_legend_votes);
+void Election::report_7() {
+    sort(this->partys.begin(), this->partys.end(), comparator_legend_votes);
     
     cout << "Votação dos partidos (apenas votos de legenda):" << endl;
 
     cout << endl;
 }
 
-void Election::report_8() const {
-    // sort(this->partys.begin(), this->partys.end(), comparator_nominal_votes);
+void Election::report_8() {
+    sort(this->partys.begin(), this->partys.end(), comparator_nominal_votes);
     
     cout << "Primeiro e último colocados de cada partido:" << endl;
 
@@ -211,10 +206,11 @@ void Election::insert_candidates_in_partys(vector<Candidate*> candidates, vector
         party->add_candidate(c);
     }
 
-    for(PoliticParty*p : partys) {
-        vector<Candidate*> party_candidates = p->get_candidates();
-        sort(party_candidates.begin(), party_candidates.end(), comparator_candidates);
-    }
+    // for(PoliticParty* p : partys) {
+    //     vector<Candidate*> party_candidates = p->get_candidates();
+    //     cout << "fora " << &party_candidates;
+    //     sort(party_candidates.begin(), party_candidates.end(), comparator_candidates);
+    // }
 }
 
 void Election::insert_partys_in_candidates(vector<Candidate*> candidates, vector<PoliticParty*> partys) {
@@ -229,5 +225,6 @@ PoliticParty* Election::search_party(vector<PoliticParty*> partys, int key) {
     for(PoliticParty* p : partys) {
         if(p->get_number() == key) return p;
     }
+    // cout << "NULL";
     return NULL;
 }

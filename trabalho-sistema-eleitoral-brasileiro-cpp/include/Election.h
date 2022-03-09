@@ -1,10 +1,11 @@
 #ifndef ELECTION_H_
 #define ELECTION_H_
 
-#include <algorithm>
-#include <vector>
 #include <string>
 #include <iostream>
+#include <vector>
+#include <algorithm>
+
 #include "NumberUtils.h"
 #include "PoliticParty.h"
 #include "Candidate.h"
@@ -17,18 +18,18 @@ class Election {
     time_t date;
 
 public:
-    Election(vector<Candidate*>& candidates, vector<PoliticParty*>& partys, const string& date);
+    Election(const vector<Candidate*>& candidates, const vector<PoliticParty*>& partys, const string& date);
 
     int qtd_elected() const;
 
     void report_1() const;
-    void report_2() const;
-    void report_3() const;
-    void report_4() const;
-    void report_5() const;
-    void report_6() const;
-    void report_7() const;
-    void report_8() const;
+    void report_2();
+    void report_3();
+    void report_4();
+    void report_5();
+    void report_6();
+    void report_7();
+    void report_8();
     void report_9() const;
     void report_10() const;
     void report_11() const;

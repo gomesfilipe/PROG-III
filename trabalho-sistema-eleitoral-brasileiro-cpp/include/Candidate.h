@@ -1,9 +1,11 @@
 #ifndef CANDIDATE_H_
 #define CANDIDATE_H_
 
-#include <algorithm>
 #include <string>
 #include <iostream>
+#include <vector>
+#include <algorithm>
+
 #include "Person.h"
 using namespace std;
 
