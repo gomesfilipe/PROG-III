@@ -225,6 +225,5 @@ PoliticParty* Election::search_party(vector<PoliticParty*> partys, int key) {
     for(PoliticParty* p : partys) {
         if(p->get_number() == key) return p;
     }
-    // cout << "NULL";
     return NULL;
 }

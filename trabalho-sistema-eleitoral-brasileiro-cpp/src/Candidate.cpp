@@ -65,20 +65,6 @@ ostream& operator<<(ostream& out, const Candidate& candidate) {
     return out;
 }
 
-// bool Candidate::operator<(const Candidate& candidate) {
-//     if(candidate.nominalVotes == this->nominalVotes) {
-//         time_t birth1 = this->get_birth();
-//         time_t birth2 = candidate.get_birth();
-
-//         if(birth1 < birth2) return true;
-//         else return false;
-    
-//     } else {
-//         if(candidate.nominalVotes > this->nominalVotes) return false;
-//         else return true;
-//     }
-// }
-
 bool comparator_candidates(const Candidate* m, const Candidate* n) {
     if(n->get_nominal_votes() == m->get_nominal_votes()) {
         time_t birth1 = m->get_birth();

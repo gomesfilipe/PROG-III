@@ -37,7 +37,6 @@ public:
     bool valid_vote() const;
 
     friend ostream& operator<<(ostream& out, const Candidate& candidate);
-    // bool operator<(const Candidate& candidate);
 };
 
 bool comparator_candidates(const Candidate* m, const Candidate* n);
