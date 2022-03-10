@@ -1,5 +1,3 @@
-TESTES := ../testes/vitória/
-
 TARGET := vereadores
 LIBS := -lm
 # CFLAGS := -g -O3 
@@ -32,16 +30,11 @@ $(CLIENT).o: $(CLI)
 $(TARGET): $(OBJECTS)
 	$(CC) $(INCLUDE_PATHS) $(OBJECTS) $(LIBS) $(CPPFLAGS) -o $@
 
-clean: # Remove pasta com os arquivos objeto e o executável.
+clean: # Remove pasta com os arquivos objeto, o executável e os arquivos csv usados para input.
 	-rm -f -r obj
 	-rm -f *.o
 	-rm -f $(TARGET)
+	-rm -f *.csv
 
-run: # Executa o programa com valgrind com uma entrada específica.
-	valgrind ./$(TARGET) $(TESTES)in/candidatos.csv $(TESTES)in/partidos.csv 15/11/2020
-
-# run: # Executa o programa com valgrind com uma entrada específica.
-# 	./vereadores candidatos.csv partidos.csv 15/11/2020
-
-diff:
-	diff teste.txt $(TESTES)out/output.txt
+run:
+	./vereadores candidatos.csv partidos.csv 15/11/2020
