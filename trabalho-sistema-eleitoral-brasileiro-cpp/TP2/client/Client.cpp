@@ -52,8 +52,3 @@ int main(int argc, char** argv) {
     
     return 0;
 }
-
-//TODO
-// Fazer exceções
-// Verificar problema do \r\n no test.sh
-
