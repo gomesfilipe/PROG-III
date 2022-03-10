@@ -38,7 +38,7 @@ clean: # Remove pasta com os arquivos objeto e o executável.
 	-rm -f $(TARGET)
 
 run: # Executa o programa com valgrind com uma entrada específica.
-	./$(TARGET) $(TESTES)in/candidatos.csv $(TESTES)in/partidos.csv 15/11/2020 > teste.txt
+	valgrind ./$(TARGET) $(TESTES)in/candidatos.csv $(TESTES)in/partidos.csv 15/11/2020
 
 # run: # Executa o programa com valgrind com uma entrada específica.
 # 	./vereadores candidatos.csv partidos.csv 15/11/2020

@@ -11,6 +11,8 @@
 #include "PoliticParty.h"
 #include "Tokenizer.h"
 #include "StringUtils.h"
+#include "Exception.h"
+#include "ExceptionFile.h"
 using namespace std;
 
 /**

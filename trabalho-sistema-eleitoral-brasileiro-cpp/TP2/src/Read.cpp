@@ -7,7 +7,10 @@ vector<PoliticParty*> read_politic_party(const string& fileName) {
     try {
         ifstream fin(fileName);  
         
-        if(!fin.good()) throw fileName;
+        if(!fin.good()) {
+            fin.close();
+            file_not_found_exception();
+        }
 
         string line;
         getline(fin, line);
@@ -30,8 +33,8 @@ vector<PoliticParty*> read_politic_party(const string& fileName) {
 
         fin.close();
 
-    } catch(string e) {
-        cerr << "File [" << e <<"] not found." << endl;
+    } catch(Exception e) {
+        cerr << e << endl;
         exit(1);
     }
 
@@ -54,7 +57,10 @@ vector<Candidate*> read_candidate(const string& fileName) {
     try {
         ifstream fin(fileName);
 
-        if(!fin.good()) throw fileName;
+        if(!fin.good()) {
+            fin.close();
+            file_not_found_exception();
+        }
 
         string line;
         getline(fin, line);
@@ -83,8 +89,8 @@ vector<Candidate*> read_candidate(const string& fileName) {
 
         fin.close();
 
-    } catch(string e) {
-        cerr << "File [" << e <<"] not found." << endl;
+    } catch(Exception e) {
+        cerr << e << endl;
         exit(1);
     }
 

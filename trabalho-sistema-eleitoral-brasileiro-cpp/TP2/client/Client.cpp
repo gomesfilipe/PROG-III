@@ -2,6 +2,9 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "../include/Exception.h"
+#include "../include/ExceptionDate.h"
+#include "../include/ExceptionFile.h"
 #include "../include/DateUtils.h"
 #include "../include/Read.h"
 #include "../include/Election.h"
@@ -20,10 +23,10 @@ int main(int argc, char** argv) {
     string date_election = argv[3];
 
     try {
-        if(!validDate(date_election, "%d/%m/%Y")) throw date_election;
+        if(!validDate(date_election, "%d/%m/%Y")) invalid_date_exception();
 
-    } catch(string e) {
-        cerr << "[" << e << "] is not a valid date." << endl;
+    } catch(Exception e) {
+        cerr << e << endl;
         exit(1);
     }
     
