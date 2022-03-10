@@ -37,4 +37,4 @@ clean: # Remove pasta com os arquivos objeto, o executável e os arquivos csv us
 	-rm -f *.csv
 
 run:
-	./vereadores candidatos.csv partidos.csv 15/11/2020
+	@./$(TARGET) candidatos.csv partidos.csv 15/11/2020
